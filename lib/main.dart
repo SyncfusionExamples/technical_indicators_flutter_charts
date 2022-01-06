@@ -93,46 +93,69 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(),
       body: Center(
-          child: SfCartesianChart(
-        primaryXAxis: DateTimeAxis(),
-        primaryYAxis: NumericAxis(),
-        axes: [
-          NumericAxis(
-            opposedPosition: true,
-            name: 'indicator',
-          )
-        ],
-        indicators: <TechnicalIndicators<ChartSampleData, DateTime>>[
-          /// ATR indicator mentioned here.
-          AtrIndicator<ChartSampleData, DateTime>(
-              seriesName: 'AAPL', period: 3, yAxisName: 'indicator'),
-        ],
-        // For rendering indicator without series data
-        /*
-        indicators: <TechnicalIndicators<ChartSampleData, DateTime>>[
-          /// ATR indicator mentioned here.
-          AtrIndicator<ChartSampleData, DateTime>(
+          child: Column(children: <Widget>[
+        SfCartesianChart(
+          title: ChartTitle(text: 'with series data'),
+          primaryXAxis: DateTimeAxis(),
+          primaryYAxis: NumericAxis(),
+          axes: [
+            NumericAxis(
+              opposedPosition: true,
+              name: 'indicator',
+            )
+          ],
+          indicators: <TechnicalIndicators<ChartSampleData, DateTime>>[
+            /// ATR indicator mentioned here.
+            AtrIndicator<ChartSampleData, DateTime>(
+                seriesName: 'AAPL', period: 3, yAxisName: 'indicator'),
+          ],
+          series: <ChartSeries<ChartSampleData, DateTime>>[
+            HiloOpenCloseSeries<ChartSampleData, DateTime>(
               dataSource: chartData,
-              period: 3,
-              yAxisName: 'indicator',
-              xValueMapper: (ChartSampleData data, _) => data.x,
-              lowValueMapper: (ChartSampleData data, _) => data.low,
-              highValueMapper: (ChartSampleData data, _) => data.high,
-              closeValueMapper: (ChartSampleData data, _) => data.close),
-        ],
-         */
-        series: <ChartSeries<ChartSampleData, DateTime>>[
-          HiloOpenCloseSeries<ChartSampleData, DateTime>(
-            dataSource: chartData,
-            xValueMapper: (ChartSampleData sales, _) => sales.x as DateTime,
-            lowValueMapper: (ChartSampleData sales, _) => sales.low,
-            highValueMapper: (ChartSampleData sales, _) => sales.high,
-            openValueMapper: (ChartSampleData sales, _) => sales.open,
-            closeValueMapper: (ChartSampleData sales, _) => sales.close,
-            name: 'AAPL',
-          )
-        ],
-      )),
+              xValueMapper: (ChartSampleData sales, _) => sales.x as DateTime,
+              lowValueMapper: (ChartSampleData sales, _) => sales.low,
+              highValueMapper: (ChartSampleData sales, _) => sales.high,
+              openValueMapper: (ChartSampleData sales, _) => sales.open,
+              closeValueMapper: (ChartSampleData sales, _) => sales.close,
+              name: 'AAPL',
+            )
+          ],
+        ),
+        const Padding(padding: EdgeInsets.only(top: 20)),
+        SfCartesianChart(
+          title: ChartTitle(text: 'without series data'),
+          primaryXAxis: DateTimeAxis(),
+          primaryYAxis: NumericAxis(),
+          axes: [
+            NumericAxis(
+              opposedPosition: true,
+              name: 'indicator',
+            )
+          ],
+          indicators: <TechnicalIndicators<ChartSampleData, DateTime>>[
+            /// ATR indicator mentioned here.
+            AtrIndicator<ChartSampleData, DateTime>(
+                dataSource: chartData,
+                period: 3,
+                yAxisName: 'indicator',
+                xValueMapper: (ChartSampleData data, _) => data.x,
+                lowValueMapper: (ChartSampleData data, _) => data.low,
+                highValueMapper: (ChartSampleData data, _) => data.high,
+                closeValueMapper: (ChartSampleData data, _) => data.close),
+          ],
+          series: <ChartSeries<ChartSampleData, DateTime>>[
+            HiloOpenCloseSeries<ChartSampleData, DateTime>(
+              dataSource: chartData,
+              xValueMapper: (ChartSampleData sales, _) => sales.x as DateTime,
+              lowValueMapper: (ChartSampleData sales, _) => sales.low,
+              highValueMapper: (ChartSampleData sales, _) => sales.high,
+              openValueMapper: (ChartSampleData sales, _) => sales.open,
+              closeValueMapper: (ChartSampleData sales, _) => sales.close,
+              name: 'AAPL',
+            )
+          ],
+        ),
+      ])),
     );
   }
 }
