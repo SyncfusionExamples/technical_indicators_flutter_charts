@@ -104,15 +104,15 @@ class _MyHomePageState extends State<MyHomePage> {
               name: 'indicator',
             )
           ],
-          indicators: <TechnicalIndicators<ChartSampleData, DateTime>>[
+          indicators: <TechnicalIndicator<ChartSampleData, DateTime>>[
             /// ATR indicator mentioned here.
             AtrIndicator<ChartSampleData, DateTime>(
                 seriesName: 'AAPL', period: 3, yAxisName: 'indicator'),
           ],
-          series: <ChartSeries<ChartSampleData, DateTime>>[
+          series: <HiloOpenCloseSeries<ChartSampleData, DateTime>>[
             HiloOpenCloseSeries<ChartSampleData, DateTime>(
               dataSource: chartData,
-              xValueMapper: (ChartSampleData sales, _) => sales.x as DateTime,
+              xValueMapper: (ChartSampleData sales, _) => sales.x,
               lowValueMapper: (ChartSampleData sales, _) => sales.low,
               highValueMapper: (ChartSampleData sales, _) => sales.high,
               openValueMapper: (ChartSampleData sales, _) => sales.open,
@@ -132,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
               name: 'indicator',
             )
           ],
-          indicators: <TechnicalIndicators<ChartSampleData, DateTime>>[
+          indicators: <TechnicalIndicator<ChartSampleData, DateTime>>[
             /// ATR indicator mentioned here.
             AtrIndicator<ChartSampleData, DateTime>(
                 dataSource: chartData,
@@ -143,10 +143,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 highValueMapper: (ChartSampleData data, _) => data.high,
                 closeValueMapper: (ChartSampleData data, _) => data.close),
           ],
-          series: <ChartSeries<ChartSampleData, DateTime>>[
+          series: <HiloOpenCloseSeries<ChartSampleData, DateTime>>[
             HiloOpenCloseSeries<ChartSampleData, DateTime>(
               dataSource: chartData,
-              xValueMapper: (ChartSampleData sales, _) => sales.x as DateTime,
+              xValueMapper: (ChartSampleData sales, _) => sales.x,
               lowValueMapper: (ChartSampleData sales, _) => sales.low,
               highValueMapper: (ChartSampleData sales, _) => sales.high,
               openValueMapper: (ChartSampleData sales, _) => sales.open,
